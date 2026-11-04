@@ -6,11 +6,16 @@ export function isRecord(value: unknown): value is JsonRecord {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
-/** Reads a field case-insensitively, because API field casing is not guaranteed. */
+const fieldKey = (k: string): string => k.replace(/_/g, "").toLowerCase();
+
+/**
+ * Reads a field regardless of casing or underscores, because the same İZSU data is published
+ * as "BarajKuyuAdi" by the web service and as "BARAJ_KUYU_ADI" by the open data portal.
+ */
 export function pick(record: JsonRecord, key: string): unknown {
   if (key in record) return record[key];
-  const lower = key.toLowerCase();
-  const match = Object.keys(record).find((k) => k.toLowerCase() === lower);
+  const wanted = fieldKey(key);
+  const match = Object.keys(record).find((k) => fieldKey(k) === wanted);
   return match === undefined ? undefined : record[match];
 }
 

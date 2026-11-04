@@ -6,6 +6,11 @@ import { fetchJson } from "../lib/http.ts";
 import { isRecord, pick, round, text, toIsoDate, toMonth, toNumber } from "../lib/parse.ts";
 
 const BASE = "https://openapi.izmir.bel.tr/api/izsu";
+/** Fallback: the same dam table on İzmir's CKAN open data portal (refreshed less often). */
+const CKAN_DAMS = "https://acikveri.bizizmir.com/api/3/action/datastore_search?resource_id=5c2ad5b0-f681-45a6-b72c-170791ea8f50&limit=100";
+
+/** "Tahtalı Barajı" and "Tahtalı" are the same dam. */
+export const damName = (raw: string): string => raw.replace(/\s+baraj[ıi]$/iu, "").trim();
 
 export interface DamReading {
   date: string;
@@ -39,7 +44,7 @@ export function normalizeDamStatus(raw: unknown): DamReading[] {
   const isFraction = fills.length > 0 && Math.max(...fills) <= 1;
   return records.flatMap((r) => {
     const date = toIsoDate(pick(r, "DurumTarihi"));
-    const dam = text(pick(r, "BarajKuyuAdi"));
+    const dam = damName(text(pick(r, "BarajKuyuAdi")));
     if (date === null || dam === "") return [];
     const fill = toNumber(pick(r, "DolulukOrani"));
     return [
@@ -82,7 +87,24 @@ export function normalizeMonthlyProduction(raw: unknown): MonthlyProduction[] {
   });
 }
 
-export const fetchDamStatus = async (): Promise<DamReading[]> => normalizeDamStatus(await fetchJson(`${BASE}/barajdurum`));
+export function ckanRecords(raw: unknown): unknown {
+  const result = isRecord(raw) ? raw["result"] : undefined;
+  if (!isRecord(result) || !Array.isArray(result["records"])) throw new Error("CKAN: missing result.records");
+  return result["records"];
+}
+
+/** Live web service first; if it is down, the open data portal's latest snapshot. */
+export async function fetchDamStatus(): Promise<{ rows: DamReading[]; via: string }> {
+  try {
+    return { rows: normalizeDamStatus(await fetchJson(`${BASE}/barajdurum`)), via: "İZSU web service" };
+  } catch (primary) {
+    try {
+      return { rows: normalizeDamStatus(ckanRecords(await fetchJson(CKAN_DAMS))), via: "open data portal snapshot" };
+    } catch (fallback) {
+      throw new Error(`${primary instanceof Error ? primary.message : String(primary)}; fallback: ${fallback instanceof Error ? fallback.message : String(fallback)}`);
+    }
+  }
+}
 
 export const fetchDailyProduction = async (): Promise<ProductionReading[]> =>
   normalizeDailyProduction(await fetchJson(`${BASE}/gunluksuuretimi`));

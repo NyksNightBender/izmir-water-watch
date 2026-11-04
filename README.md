@@ -73,7 +73,7 @@ npm run typecheck
 
 ## Sources
 
-- **İZSU Genel Müdürlüğü** open web services via İzmir Büyükşehir Belediyesi: dam status, daily production and monthly production by source ([service documentation](https://openfiles.izmir.bel.tr/309436/docs/izsu-WebServisKullanimDokumani_1.0.pdf), [İzmir open data portal](https://acikveri.bizizmir.com/)).
+- **İZSU Genel Müdürlüğü** open web services via İzmir Büyükşehir Belediyesi: dam status, daily production and monthly production by source ([service documentation](https://openfiles.izmir.bel.tr/309436/docs/izsu-WebServisKullanimDokumani_1.0.pdf)). When the dam service is down, the pipeline falls back to the dam table on the [İzmir open data portal](https://acikveri.bizizmir.com/dataset/barajlarin-doluluk-oranlari), which is refreshed less often.
 - **[Open-Meteo](https://open-meteo.com/)** forecast and historical weather APIs, licensed CC BY 4.0.
 
 Code is MIT licensed. Data belongs to its publishers.

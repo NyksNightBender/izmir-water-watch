@@ -35,6 +35,5 @@ jobs:
             echo "Nothing new today."
             exit 0
           fi
-          latest=$(tail -n 1 data/dams.csv | cut -d, -f1)
-          git commit -m "data: İzmir water update for ${latest:-$(date -u +%F)}"
+          git commit -m "data: İzmir water update for $(TZ=Europe/Istanbul date +%F)"
           git push

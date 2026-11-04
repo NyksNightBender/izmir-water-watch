@@ -52,8 +52,10 @@ async function step(source: string, run: () => Promise<number>): Promise<void> {
   }
 }
 
+let damsVia = "";
 await step("İZSU dam status", async () => {
-  const rows = await fetchDamStatus();
+  const { rows, via } = await fetchDamStatus();
+  damsVia = via;
   save(
     FILES.dams,
     rows.map((r) => ({
@@ -68,6 +70,7 @@ await step("İZSU dam status", async () => {
   );
   return rows.length;
 });
+if (damsVia !== "") report.at(-1)!.detail += ` via ${damsVia}`;
 
 await step("İZSU daily production", async () => {
   const rows = await fetchDailyProduction();

@@ -1,6 +1,6 @@
 import { strict as assert } from "node:assert";
 import { test } from "node:test";
-import { normalizeDailyProduction, normalizeDamStatus, normalizeMonthlyProduction } from "../src/sources/izsu.ts";
+import { ckanRecords, normalizeDailyProduction, normalizeDamStatus, normalizeMonthlyProduction } from "../src/sources/izsu.ts";
 
 test("normalizeDamStatus maps the documented fields", () => {
   const rows = normalizeDamStatus([
@@ -52,4 +52,20 @@ test("normalizeMonthlyProduction accepts month names", () => {
   assert.deepEqual(normalizeMonthlyProduction([{ Yil: 2025, Ay: "Mart", UretimKaynagi: "Tahtalı", UretimMiktari: 9_000_000 }]), [
     { year: 2025, month: 3, source: "Tahtalı", m3: 9_000_000 },
   ]);
+});
+
+test("normalizeDamStatus reads the open data portal's CKAN format", () => {
+  const raw = {
+    success: true,
+    result: {
+      records: [
+        { _id: 1, BARAJ_KUYU_ADI: "Tahtalı Barajı", DURUM_TARIHI: "2026-10-14T00:00:00", SU_DURUMU: 142323000, DOLULUK_ORANI: 42.75, SU_YUKSEKLIGI: 42.75, TUKETILEBILIR_SU_KAPASITESI: 122723000, MAKSIMUM_SU_KAPASITESI: 306650000 },
+      ],
+    },
+  };
+  const [row] = normalizeDamStatus(ckanRecords(raw));
+  assert.equal(row?.dam, "Tahtalı");
+  assert.equal(row?.date, "2026-10-14");
+  assert.equal(row?.fillPct, 42.75);
+  assert.equal(row?.volumeM3, 142323000);
 });
