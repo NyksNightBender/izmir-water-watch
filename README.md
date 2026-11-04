@@ -14,6 +14,8 @@ It is a companion to my TÜBİTAK 2209-A research project on machine-learning-ba
 <!-- LATEST:START -->
 _No dam readings yet._
 
+**Weather on 2026-11-03:** 14.3–20.0 °C, rain 0.5 mm, evapotranspiration 1.4 mm.
+
 **Unusual days:** collecting history (0 of 15 days needed before flagging starts).
 <!-- LATEST:END -->
 

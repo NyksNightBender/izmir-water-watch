@@ -1,5 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 380" width="820" height="380" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif">
 <text x="16" y="28" font-size="17" font-weight="600" fill="#8b949e">Rain vs evaporation in İzmir</text>
 <text x="16" y="48" font-size="12" fill="#8b949e">Monthly totals from Open-Meteo. When evaporation beats rain, the dams fall.</text>
-<text x="410" y="190" text-anchor="middle" font-size="14" fill="#8b949e">Collecting data. The first points appear after the next daily run.</text>
+<rect x="16" y="57" width="12" height="12" rx="2" fill="#3b82f6"/>
+<text x="34" y="67" font-size="12" fill="#8b949e">Rain (mm)</text>
+<rect x="216" y="57" width="12" height="12" rx="2" fill="#10b981"/>
+<text x="234" y="67" font-size="12" fill="#8b949e">Evapotranspiration (mm)</text>
+<line x1="56" x2="792" y1="344.0" y2="344.0" stroke="#8b949e" stroke-opacity="0.25"/>
+<text x="48" y="344.0" dy="4" text-anchor="end" font-size="11" fill="#8b949e">0</text>
+<line x1="56" x2="792" y1="306.9" y2="306.9" stroke="#8b949e" stroke-opacity="0.25"/>
+<text x="48" y="306.9" dy="4" text-anchor="end" font-size="11" fill="#8b949e">50</text>
+<line x1="56" x2="792" y1="269.7" y2="269.7" stroke="#8b949e" stroke-opacity="0.25"/>
+<text x="48" y="269.7" dy="4" text-anchor="end" font-size="11" fill="#8b949e">100</text>
+<line x1="56" x2="792" y1="232.6" y2="232.6" stroke="#8b949e" stroke-opacity="0.25"/>
+<text x="48" y="232.6" dy="4" text-anchor="end" font-size="11" fill="#8b949e">150</text>
+<line x1="56" x2="792" y1="195.4" y2="195.4" stroke="#8b949e" stroke-opacity="0.25"/>
+<text x="48" y="195.4" dy="4" text-anchor="end" font-size="11" fill="#8b949e">200</text>
+<line x1="56" x2="792" y1="158.3" y2="158.3" stroke="#8b949e" stroke-opacity="0.25"/>
+<text x="48" y="158.3" dy="4" text-anchor="end" font-size="11" fill="#8b949e">250</text>
+<line x1="56" x2="792" y1="121.1" y2="121.1" stroke="#8b949e" stroke-opacity="0.25"/>
+<text x="48" y="121.1" dy="4" text-anchor="end" font-size="11" fill="#8b949e">300</text>
+<line x1="56" x2="792" y1="84.0" y2="84.0" stroke="#8b949e" stroke-opacity="0.25"/>
+<text x="48" y="84.0" dy="4" text-anchor="end" font-size="11" fill="#8b949e">350</text>
+<text x="56.0" y="362" text-anchor="middle" font-size="11" fill="#8b949e">Jan 24</text>
+<text x="178.7" y="362" text-anchor="middle" font-size="11" fill="#8b949e">Jun 24</text>
+<text x="301.3" y="362" text-anchor="middle" font-size="11" fill="#8b949e">Nov 24</text>
+<text x="424.0" y="362" text-anchor="middle" font-size="11" fill="#8b949e">May 25</text>
+<text x="546.7" y="362" text-anchor="middle" font-size="11" fill="#8b949e">Oct 25</text>
+<text x="669.3" y="362" text-anchor="middle" font-size="11" fill="#8b949e">Apr 26</text>
+<text x="792.0" y="362" text-anchor="middle" font-size="11" fill="#8b949e">Oct 26</text>
+<path d="M56.0,266.7L78.7,314.3L100.0,322.5L122.7,320.2L144.7,313.5L167.4,344.0L189.4,338.8L212.1,338.8L234.9,312.8L256.9,342.5L279.6,286.1L301.6,172.4L324.3,250.4L347.0,317.3L367.6,337.3L390.3,271.9L412.3,319.5L435.0,344.0L457.0,344.0L479.7,343.3L502.4,335.1L524.4,270.5L547.2,285.3L569.1,321.0L591.9,179.1L614.6,106.3L635.1,278.6L657.8,301.7L679.8,309.1L702.6,332.9L724.6,342.5L747.3,342.5L770.0,336.6L792.0,302.4" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="792.0" cy="302.4" r="3.5" fill="#3b82f6"/>
+<path d="M56.0,309.1L78.7,299.4L100.0,274.2L122.7,235.5L144.7,222.9L167.4,171.7L189.4,153.8L212.1,180.6L234.9,240.0L256.9,257.8L279.6,298.7L301.6,315.8L324.3,313.5L347.0,307.6L367.6,263.8L390.3,260.1L412.3,210.3L435.0,165.7L457.0,163.5L479.7,185.0L502.4,224.4L524.4,284.6L547.2,297.9L569.1,314.3L591.9,306.9L614.6,306.9L635.1,282.3L657.8,261.5L679.8,229.6L702.6,188.7L724.6,165.7L747.3,182.8L770.0,230.3L792.0,277.9" fill="none" stroke="#10b981" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="792.0" cy="277.9" r="3.5" fill="#10b981"/>
 </svg>
