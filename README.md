@@ -12,7 +12,15 @@ It is a companion to my TÜBİTAK 2209-A research project on machine-learning-ba
 ## Latest
 
 <!-- LATEST:START -->
-_No dam readings yet._
+**Dam levels on 2026-10-14**
+
+| Dam | Fill | 7-day change | Water volume |
+| --- | ---: | ---: | ---: |
+| Ürkmez | 60.5% | – | 5.00 million m³ |
+| Alaçatı Kutlu Aktaş | 49.4% | – | 8.41 million m³ |
+| Balçova | 44.8% | – | 3.55 million m³ |
+| Tahtalı | 42.8% | – | 142.32 million m³ |
+| Gördes | 29.3% | – | 143.68 million m³ |
 
 **Weather on 2026-11-03:** 14.3–20.0 °C, rain 0.5 mm, evapotranspiration 1.4 mm.
 
