@@ -1,0 +1,16 @@
+name: probe
+on: workflow_dispatch
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          for u in barajdurum gunluksuuretimi barajvekuyular arizakaynaklisukesintileri; do
+            a=$(curl -s -o /dev/null -m 30 -w "%{http_code}" "https://openapi.izmir.bel.tr/api/izsu/$u")
+            b=$(curl -s -o /dev/null -m 30 -w "%{http_code}" -H "Accept: application/json" "https://openapi.izmir.bel.tr/api/izsu/$u")
+            c=$(curl -s -o /dev/null -m 30 -w "%{http_code}" -A "Mozilla/5.0" "https://openapi.izmir.bel.tr/api/izsu/$u")
+            echo "::notice title=$u::plain=$a accept-json=$b browser-ua=$c"
+          done
+          d=$(curl -s -o /dev/null -m 30 -w "%{http_code}" "https://openapi.izmir.bel.tr/api/ibb/nobetcieczaneler")
+          e=$(curl -s -o /dev/null -m 30 -w "%{http_code}" "https://acikveri.bizizmir.com/api/3/action/datastore_search?resource_id=5c2ad5b0-f681-45a6-b72c-170791ea8f50&limit=1")
+          echo "::notice title=other::ibb-api=$d ckan=$e"
