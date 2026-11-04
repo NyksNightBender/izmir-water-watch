@@ -1,0 +1,40 @@
+name: Daily data update
+
+on:
+  schedule:
+    - cron: "23 6 * * *" # 09:23 in İzmir, after İZSU publishes the morning readings
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - name: Fetch data, detect unusual days, redraw charts
+        run: node src/index.ts
+
+      - name: Commit changes
+        run: |
+          git config user.name "Ege Çelik"
+          git config user.email "213240166+NyksNightBender@users.noreply.github.com"
+          git add data charts README.md
+          if git diff --cached --quiet; then
+            echo "Nothing new today."
+            exit 0
+          fi
+          latest=$(tail -n 1 data/dams.csv | cut -d, -f1)
+          git commit -m "data: İzmir water update for ${latest:-$(date -u +%F)}"
+          git push

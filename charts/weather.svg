@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 380" width="820" height="380" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif">
+<text x="16" y="28" font-size="17" font-weight="600" fill="#8b949e">Rain vs evaporation in İzmir</text>
+<text x="16" y="48" font-size="12" fill="#8b949e">Monthly totals from Open-Meteo. When evaporation beats rain, the dams fall.</text>
+<text x="410" y="190" text-anchor="middle" font-size="14" fill="#8b949e">Collecting data. The first points appear after the next daily run.</text>
+</svg>
