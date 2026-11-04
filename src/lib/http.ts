@@ -16,5 +16,16 @@ export async function fetchJson(url: string, attempts = 3): Promise<unknown> {
       if (attempt < attempts) await new Promise((resolve) => setTimeout(resolve, 2_000 * attempt));
     }
   }
-  throw lastError instanceof Error ? lastError : new Error(String(lastError));
+  throw new Error(`${url}: ${describe(lastError)}`);
+}
+
+/** Node's fetch hides the useful part ("certificate has expired", "ECONNRESET") in error.cause. */
+export function describe(error: unknown): string {
+  if (!(error instanceof Error)) return String(error);
+  const cause: unknown = error.cause;
+  if (cause instanceof Error) {
+    const code = (cause as Error & { code?: string }).code;
+    return `${error.message} (${code ? `${code}: ` : ""}${cause.message})`;
+  }
+  return error.message;
 }

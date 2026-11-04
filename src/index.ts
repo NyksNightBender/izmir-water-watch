@@ -45,7 +45,10 @@ async function step(source: string, run: () => Promise<number>): Promise<void> {
   try {
     report.push({ source, ok: true, detail: `${await run()} rows` });
   } catch (error) {
-    report.push({ source, ok: false, detail: error instanceof Error ? error.message : String(error) });
+    const detail = error instanceof Error ? error.message : String(error);
+    report.push({ source, ok: false, detail });
+    // Shows up as a warning annotation on the Actions run page.
+    if (process.env["GITHUB_ACTIONS"]) console.log(`::warning title=${source} failed::${detail.replace(/\r?\n/g, " ")}`);
   }
 }
 
