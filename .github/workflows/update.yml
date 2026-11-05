@@ -1,8 +1,13 @@
 name: Daily data update
 
+# GitHub's scheduler is best-effort: scheduled runs can be late or dropped entirely.
+# Three slots a day make sure at least one lands; later slots exit early once
+# today's update is committed, so there is still at most one data commit a day.
 on:
   schedule:
-    - cron: "23 6 * * *" # 09:23 in İzmir, after İZSU publishes the morning readings
+    - cron: "23 6 * * *"  # 09:23 İzmir
+    - cron: "47 11 * * *" # 14:47 İzmir, backup
+    - cron: "13 17 * * *" # 20:13 İzmir, backup
   workflow_dispatch:
 
 permissions:
@@ -19,14 +24,26 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      - name: Skip if today's update already ran
+        id: check
+        run: |
+          today=$(TZ=Europe/Istanbul date +%F)
+          if [ "${{ github.event_name }}" = "schedule" ] && git log --format=%s -n 20 | grep -qx "data: İzmir water update for ${today}"; then
+            echo "Already updated for ${today}."
+            echo "done=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: actions/setup-node@v5
+        if: steps.check.outputs.done != 'true'
         with:
           node-version: 24
 
       - name: Fetch data, detect unusual days, redraw charts
+        if: steps.check.outputs.done != 'true'
         run: node src/index.ts
 
       - name: Commit changes
+        if: steps.check.outputs.done != 'true'
         run: |
           git config user.name "Ege Çelik"
           git config user.email "213240166+NyksNightBender@users.noreply.github.com"
