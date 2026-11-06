@@ -22,7 +22,7 @@ It is a companion to my TÜBİTAK 2209-A research project on machine-learning-ba
 | Tahtalı | 42.8% | – | 142.32 million m³ |
 | Gördes | 29.3% | – | 143.68 million m³ |
 
-**Weather on 2026-11-05:** 11.2–17.9 °C, rain 0.0 mm, evapotranspiration 2.6 mm.
+**Weather on 2026-11-06:** 7.9–16.4 °C, rain 0.0 mm, evapotranspiration 2.3 mm.
 
 **Unusual days:** collecting history (0 of 15 days needed before flagging starts).
 <!-- LATEST:END -->
